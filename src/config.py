@@ -3,15 +3,23 @@ from decouple import config
 
 
 class FastAPI(BaseSettings):
-    host: str = config("FASTAPI_HOST")
-    port: int = config("FASTAPI_PORT")
-    reload: bool = True
+    host: str
+    port: int
+    reload: bool
+
+    class Config:
+        env_prefix = "FASTAPI_"
+        env_file = ".env"
 
 
 class MongoDB(BaseSettings):
-    host: str = config("MONGO_HOST")
-    port: int = config("MONGO_PORT")
-    db_name: str = config("MONGO_DB_NAME")
+    host: str
+    port: int
+    db_name: str
+
+    class Config:
+        env_prefix = "MONGO_"
+        env_file = ".env"
 
 
 class Settings:
