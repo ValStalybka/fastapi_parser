@@ -21,6 +21,7 @@ class LamodaParser:
                 is_empty = True
 
             else:
+                product_list_for_db = []
                 gender = soup.find("a", class_="d-header-genders_link_active").text
                 category = soup.find("div", class_="x-footer-seo-menu-tab_opened").text
 
@@ -49,4 +50,5 @@ class LamodaParser:
                         "category": category,
                         "url": link,
                     }
-                    controller.lamoda.create_product(data=data)
+                    product_list_for_db.append(data)
+                controller.lamoda.create_many_products(product_list_for_db)

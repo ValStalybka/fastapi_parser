@@ -1,3 +1,4 @@
+from typing import Dict
 from typing import List
 
 from fastapi import APIRouter
@@ -29,10 +30,10 @@ async def get_product(product_id: str):
 
 
 @router.patch("/products/{product_id}", response_model=Product)
-async def update_product(product_id: str, data: dict):
+async def update_product(product_id: str, data: Dict):
     return controller.lamoda.update_product(product_id, data)
 
 
 @router.delete("/products/{product_id}")
-async def delete_product(product_id: str) -> dict:
+async def delete_product(product_id: str) -> Dict:
     return controller.lamoda.delete_object(product_id)
