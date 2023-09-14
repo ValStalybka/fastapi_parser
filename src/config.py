@@ -37,6 +37,14 @@ class Twitch(BaseSettings):
     app_id: str
     app_secret: str
 
+    get_token_url: str = (
+        "https://id.twitch.tv/oauth2/token?client_id={app_id}&"
+        "client_secret={app_secret}&grant_type=client_credentials"
+    )
+    validate_token_url: str = "https://id.twitch.tv/oauth2/validate"
+    get_games_url: str = "https://api.twitch.tv/helix/games/top"
+    get_streams_url: str = "https://api.twitch.tv/helix/streams"
+
     class Config:
         env_prefix = "TWITCH_"
         env_file = ".env"

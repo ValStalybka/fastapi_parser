@@ -18,6 +18,11 @@ class Mongo:
         return self._client[f"{self._db}"].lamoda
 
     @property
-    def twitch(self):
-        """returns twitch collection in the db"""
-        return self._client[f"{self._db}"].twitch
+    def twitch_games(self):
+        """returns twitch games collection in the db"""
+        return self._client[f"{self._db}"].twitch_games
+
+    @property
+    def twitch_streams(self):
+        """returns twitch streams collection in the db"""
+        return self._client[f"{self._db}"].twitch_streams
