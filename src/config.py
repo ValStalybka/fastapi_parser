@@ -50,8 +50,19 @@ class Twitch(BaseSettings):
         env_file = ".env"
 
 
+class Redis(BaseSettings):
+    host: str
+    port: int
+    db: int
+
+    class Config:
+        env_prefix = "REDIS_"
+        env_file = ".env"
+
+
 class Settings:
     fastapi: FastAPI = FastAPI()
     mongo: MongoDB = MongoDB()
     lamoda: LamodaUrls = LamodaUrls()
     twitch: Twitch = Twitch()
+    redis: Redis = Redis()

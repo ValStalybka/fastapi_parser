@@ -8,6 +8,7 @@ from pymongo import ReturnDocument
 from src.dao.twitch import TwitchDAO
 from src.schemas.twitch import Game
 from src.schemas.twitch import Stream
+from src.services.redis import cache_result
 
 
 class TwitchService:
@@ -22,8 +23,8 @@ class TwitchService:
     def collection(self):
         return self._collection
 
-    def get_object_list(self, skip: int, limit: int) -> List:
-        obj_list = self.collection.find().skip(skip).limit(limit)
+    def get_object_list(self) -> List:
+        obj_list = self.collection.find()
         data = []
 
         for product in obj_list:
@@ -54,3 +55,15 @@ class TwitchService:
         if result.deleted_count == 0:
             return {"warning": "nothing deleted, check provided id"}
         return {"objects_deleted": result.deleted_count}
+
+
+class GameService(TwitchService):
+    @cache_result("twitch_games")
+    def get_object_list(self):
+        return super().get_object_list()
+
+
+class StreamService(TwitchService):
+    @cache_result("twitch_stream")
+    def get_object_list(self):
+        return super().get_object_list()

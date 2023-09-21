@@ -16,7 +16,8 @@ router = APIRouter(tags=["Twitch"], prefix="/twitch")
 @router.get("/games", response_model=List[Game])
 async def get_games_list(pagination=Depends(set_pagination)):
     skip, limit = pagination
-    return controller.games.get_object_list(skip=skip, limit=limit)
+    game_list = controller.games.get_object_list()
+    return game_list[skip : (skip + limit)]
 
 
 @router.get("/games/{game_id}", response_model=Game)
@@ -45,7 +46,8 @@ async def delete_game(game_id: str):
 @router.get("/streams", response_model=List[Stream])
 async def get_streams_list(pagination=Depends(set_pagination)):
     skip, limit = pagination
-    return controller.games.get_object_list(skip=skip, limit=limit)
+    stream_list = controller.games.get_object_list()
+    return stream_list[skip : (skip + limit)]
 
 
 @router.get("/streams/{stream_id}", response_model=Stream)

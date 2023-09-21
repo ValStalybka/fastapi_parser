@@ -1,14 +1,17 @@
+from src.dao.mongo import Mongo
 from src.dao.twitch import TwitchDAO
 from src.services.lamoda import LamodaService
-from src.services.twitch import TwitchService
+from src.services.twitch import GameService
+from src.services.twitch import StreamService
 
 
 class ServiceController:
     _lamoda = LamodaService
-    _twitch = TwitchService
+    _games = GameService
+    _streams = StreamService
     _twitch_dao = TwitchDAO()
 
-    def __init__(self, db):
+    def __init__(self, db: Mongo):
         self._db = db
 
     @property
@@ -17,11 +20,11 @@ class ServiceController:
 
     @property
     def games(self):
-        return self._twitch(self._db.twitch_games)
+        return self._games(self._db.twitch_games)
 
     @property
     def streams(self):
-        return self._twitch(self._db.twitch_streams)
+        return self._streams(self._db.twitch_streams)
 
     @property
     def twitch_dao(self):

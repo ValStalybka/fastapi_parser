@@ -5,6 +5,7 @@ from bson import ObjectId
 from pymongo import ReturnDocument
 
 from src.schemas.lamoda import Product
+from src.services.redis import cache_result
 
 
 class LamodaService:
@@ -15,6 +16,7 @@ class LamodaService:
     def collection(self):
         return self._collection
 
+    @cache_result("lamoda_product_list")
     def list_products(self) -> List:
         product_list = self.collection.find({})
         data = []
