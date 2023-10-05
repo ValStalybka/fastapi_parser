@@ -5,7 +5,7 @@ from typing import Union
 from bson import ObjectId
 from pymongo import ReturnDocument
 
-from src.dao.twitch import TwitchDAO
+from src.infrastructure.dao.twitch import TwitchDAO
 from src.schemas.twitch import Game
 from src.schemas.twitch import Stream
 from src.services.redis import cache_result

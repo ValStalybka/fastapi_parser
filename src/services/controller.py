@@ -1,5 +1,6 @@
-from src.dao.mongo import Mongo
-from src.dao.twitch import TwitchDAO
+from src.infrastructure.dao.kafka import KafkaHandler
+from src.infrastructure.dao.mongo import Mongo
+from src.infrastructure.dao.twitch import TwitchDAO
 from src.services.lamoda import LamodaService
 from src.services.twitch import GameService
 from src.services.twitch import StreamService
@@ -10,6 +11,7 @@ class ServiceController:
     _games = GameService
     _streams = StreamService
     _twitch_dao = TwitchDAO()
+    _kafka = KafkaHandler()
 
     def __init__(self, db: Mongo):
         self._db = db
@@ -29,3 +31,7 @@ class ServiceController:
     @property
     def twitch_dao(self):
         return self._twitch_dao
+
+    @property
+    def kafka(self):
+        return self._kafka

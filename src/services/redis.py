@@ -5,7 +5,7 @@ from typing import Union
 
 from bson import json_util
 
-from src.dao.redis import redis_cache
+from src.infrastructure.dao.redis import redis_cache
 
 
 def cache_result(name: Union[str, Callable]) -> Callable:
