@@ -13,6 +13,8 @@ python-decouple = "*"
 twitchapi = "*"
 pytest-dotenv = "*"
 mongomock = "*"
+redis = "*"
+kafka-python = "*"
 
 [dev-packages]
 black = "*"

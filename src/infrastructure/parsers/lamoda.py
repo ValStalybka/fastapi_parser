@@ -1,3 +1,5 @@
+import logging
+
 import httpx
 from bs4 import BeautifulSoup
 
@@ -5,11 +7,12 @@ from src.services import controller
 
 
 class LamodaParser:
-    @staticmethod
-    def parse_product_list(base_url: str) -> None:
+    __logger = logging.getLogger("Parser")
+
+    async def parse_product_list(self, base_url: str) -> None:
         page_num = 1
         is_empty = False
-
+        self.__logger.info("Starting parsing")
         while is_empty is False:
             url = base_url.format(page_num)
             page_num += 1
@@ -52,3 +55,4 @@ class LamodaParser:
                     }
                     product_list_for_db.append(data)
                 controller.lamoda.create_many_products(product_list_for_db)
+        self.__logger.info("All pages has been successfully parsed")
