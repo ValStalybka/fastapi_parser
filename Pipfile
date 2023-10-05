@@ -14,7 +14,7 @@ twitchapi = "*"
 pytest-dotenv = "*"
 mongomock = "*"
 redis = "*"
-kafka = "*"
+kafka-python = "*"
 
 [dev-packages]
 black = "*"

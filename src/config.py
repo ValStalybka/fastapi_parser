@@ -60,9 +60,23 @@ class Redis(BaseSettings):
         env_file = ".env"
 
 
+class KafkaConfig(BaseSettings):
+    host: str
+    port: int
+
+    @property
+    def server(self):
+        return f"{self.host}:{self.port}"
+
+    class Config:
+        env_prefix = "KAFKA_"
+        env_file = ".env"
+
+
 class Settings:
     fastapi: FastAPI = FastAPI()
     mongo: MongoDB = MongoDB()
     lamoda: LamodaUrls = LamodaUrls()
     twitch: Twitch = Twitch()
     redis: Redis = Redis()
+    kafka: KafkaConfig = KafkaConfig()

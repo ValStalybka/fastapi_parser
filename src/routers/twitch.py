@@ -13,6 +13,12 @@ from src.services import controller
 router = APIRouter(tags=["Twitch"], prefix="/twitch")
 
 
+@router.post("/parse")
+async def create_parsing_task(parsing_url: str):
+    message = await controller.kafka.send_message(topic="parse", data=parsing_url)
+    return message
+
+
 @router.get("/games", response_model=List[Game])
 async def get_games_list(pagination=Depends(set_pagination)):
     skip, limit = pagination

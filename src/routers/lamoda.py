@@ -11,6 +11,12 @@ from src.services import controller
 router = APIRouter(tags=["Lamoda"], prefix="/lamoda")
 
 
+@router.post("/parse")
+async def create_parsing_task(parsing_url: str):
+    message = await controller.kafka.send_message(topic="parse", data=parsing_url)
+    return message
+
+
 @router.get("/products", response_model=List[Product])
 async def get_product_list():
     return controller.lamoda.list_products()
