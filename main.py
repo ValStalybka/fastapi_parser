@@ -5,7 +5,7 @@ from src.config import Settings
 app = FastAPI()
 settings = Settings()
 
-
+# testing git config
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
